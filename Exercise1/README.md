@@ -113,7 +113,7 @@ Using SQL ([see the a list of supported SQL commands](https://www.postgresql.org
 
 **A.** What is the single item with the highest `price_per_unit`?
 
-**B.** What are the top 3 products with the highest total quantity sold across all orders?
+**B.** What are the top 3 products category with the highest total quantity sold across all orders?
 
 **C.** What is the total revenue per product category?  
 (Revenue = `price_per_unit × quantity`)
@@ -344,3 +344,9 @@ Now, explain in your own words:
 
 ## Exercise 4
 Port the SQL queries from exercise 1 to spark.
+
+
+## Clean up
+```bash
+docker compose down
+```
