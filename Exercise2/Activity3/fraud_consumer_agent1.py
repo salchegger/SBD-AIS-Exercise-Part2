@@ -1,7 +1,13 @@
-# This agent calculates a running average for each user and flags transactions that are significantly higher than their usual behavior (e.g., $3\sigma$ outliers).
+# This agent calculates a running average for each user and flags transactions 
+# that are significantly higher than their usual behavior (e.g., $3\sigma$ outliers).
 
+from kafka import KafkaConsumer
 import json
 import statistics
+
+##added - for helper functions
+#from decimal import Decimal
+#import base64
 
 # Configuration
 
@@ -35,6 +41,35 @@ def analyze_pattern(data):
     return is_anomaly
 
 print("🧬 Anomaly Detection Agent started...")
+
+
+#####################################################################
+### added - tried to fix it with this helper -> didn't help
+# def decode_amount(amount_str, scale=2):
+#     """Decode Debezium DECIMAL bytes (base64 string) to float."""
+#     if amount_str is None:
+#         return None
+#     decoded_bytes = base64.b64decode(amount_str)
+#     # Convert bytes to integer, then divide by scale
+#     return float(Decimal(int.from_bytes(decoded_bytes, "big")) / (10**scale))
+
+# def value_deserializer(m):
+#     data = json.loads(m.decode("utf-8"))
+#     after = data.get("payload", {}).get("after", {})
+#     if "amount" in after:
+#         after["amount"] = decode_amount(after["amount"])
+#     return data
+
+consumer = KafkaConsumer(
+    "dbserver1.public.transactions", # Debezium topic
+    bootstrap_servers="127.0.0.1:9094",
+    auto_offset_reset="latest",
+    enable_auto_commit=False,
+    group_id="fraud-detection-group2",
+    value_deserializer=lambda m: json.loads(m.decode("utf-8"))
+)
+######################################################
+
 
 for message in consumer: #consumer has to be implemented before!
     payload = message.value.get('payload', {})

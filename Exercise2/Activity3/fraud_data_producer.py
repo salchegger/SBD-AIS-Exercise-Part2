@@ -6,7 +6,7 @@ import psycopg
 
 conn_params = {
     "host": "127.0.0.1",
-    "port": 5432,
+    "port": 5433,
     "dbname": "mydb",
     "user": "postgres",
     "password": "postgrespw",
@@ -47,6 +47,7 @@ def generate_data(batch_size=1000):
                     for _ in range(batch_size)
                 ]
 
+                
                 cur.executemany(insert_sql, data)
                 conn.commit()
 

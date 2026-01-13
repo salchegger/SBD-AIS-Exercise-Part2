@@ -11,7 +11,7 @@ services:
       POSTGRES_PASSWORD: postgrespw
       POSTGRES_DB: mydb
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       # Note: mount at /var/lib/postgresql for Postgres 18+
       - pgdata:/var/lib/postgresql
@@ -28,6 +28,8 @@ services:
     image: docker.io/bitnamilegacy/kafka:latest
     container_name: kafka
     restart: always
+    volumes:
+      - kafka_data:/bitnami/kafka #added
     environment:
       - ALLOW_PLAINTEXT_LISTENER=yes
       # KRaft configuration

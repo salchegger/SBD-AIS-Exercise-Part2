@@ -5,13 +5,14 @@ from datetime import datetime
 import psycopg
 from psycopg import sql
 
-DB_NAME = "office_db"
+DB_NAME = "mydb"
 DB_USER = "postgres"
 DB_PASSWORD = "postgrespw"
-DB_HOST = "localhost"
-DB_PORT = 5432
+DB_HOST = "127.0.0.1"
+DB_PORT = 5433
 
 # Step 1: Connect to default database
+print("Setting up connection to PostgreSQL...")
 with psycopg.connect(
     dbname="postgres",
     user=DB_USER,
@@ -38,6 +39,7 @@ with psycopg.connect(
             print(f"Database {DB_NAME} already exists.")
 
 # Step 2: Connect to the target database
+print(f"Connecting to database {DB_NAME}...")
 with psycopg.connect(
     dbname=DB_NAME,
     user=DB_USER,
