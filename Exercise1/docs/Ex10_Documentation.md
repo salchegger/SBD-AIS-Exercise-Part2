@@ -701,4 +701,4 @@ q_D.show()
 
 ## Conclusion  
 In this exercise, I explored large-scale data processing using both PostgreSQL and Spark. PostgreSQL handled OLTP queries well but struggled with heavy aggregations and joins on a large dataset, while Spark’s distributed, in-memory architecture significantly improved performance and scalability.  
-By comparing naive SQL queries with optimized approaches in both systems, I saw firsthand how architecture and query design impact efficiency, making Spark a better choice for large-scale analytical workloads.
+ By comparing naive SQL queries with optimized approaches in both systems, I saw firsthand how architecture and query design impact efficiency, making Spark a better choice for large-scale analytical workloads.

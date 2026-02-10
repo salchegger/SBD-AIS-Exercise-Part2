@@ -5,6 +5,7 @@ Download the repository and start the environment:
 ```bash
 docker compose up -d
 ```
+
 ## Verify the services
 -Apache Pinot's Web UI: http://localhost:9000  
 
