@@ -1,0 +1,39 @@
+{
+  "tableName": "ingest_kafka_fts",
+  "tableType": "REALTIME",
+  "segmentsConfig": {
+    "timeType": "MILLISECONDS",
+    "schemaName": "ingest_kafka_fts",
+    "timeColumnName": "timestamp",
+    "replicasPerPartition": "1"
+  },
+  "fieldConfigList":[
+  {
+     "name":"content",
+     "encodingType":"RAW",
+     "indexTypes":["TEXT"]
+  }
+  ],
+  "tenants": {},
+  "tableIndexConfig": {
+    "loadMode": "MMAP",
+    "streamConfigs": {
+      "streamType": "kafka",
+      "stream.kafka.topic.name": "ingest-kafka",
+      "stream.kafka.decoder.class.name": "org.apache.pinot.plugin.inputformat.json.JSONMessageDecoder",
+      "stream.kafka.consumer.factory.class.name": "org.apache.pinot.plugin.stream.kafka20.KafkaConsumerFactory",
+      "stream.kafka.broker.list": "kafka:9092",
+      "realtime.segment.flush.threshold.rows": "0",
+      "realtime.segment.flush.threshold.time": "24h",
+      "realtime.segment.flush.threshold.segment.size": "50M",
+      "stream.kafka.consumer.prop.auto.offset.reset": "smallest"
+    },
+    "noDictionaryColumns": [
+     "content"
+    ]
+  },
+  
+  "metadata": {
+    "customConfigs": {}
+  }
+}
